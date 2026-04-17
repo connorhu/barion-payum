@@ -1,0 +1,7 @@
+{
+    "PaymentId": "pay-abc-123",
+    "PaymentRequestId": "order-42",
+    "Status": "Prepared",
+    "QRUrl": null,
+    "Errors": []
+}

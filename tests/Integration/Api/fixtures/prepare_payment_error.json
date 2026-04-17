@@ -1,0 +1,6 @@
+{
+    "PaymentId": null,
+    "Errors": [
+        {"ErrorCode": "InvalidPOSKey", "Title": "Invalid POS key", "Description": "The provided POS key is invalid.", "PosKey": "bad-key"}
+    ]
+}

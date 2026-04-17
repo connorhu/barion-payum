@@ -1,0 +1,11 @@
+{
+    "PaymentId": "pay-abc-123",
+    "PaymentRequestId": "order-42",
+    "Status": "Succeeded",
+    "Currency": "HUF",
+    "Total": 5000,
+    "Transactions": [
+        {"TransactionId": "txn-1", "POSTransactionId": "order-42", "Status": "Succeeded", "Total": 5000, "Currency": "HUF"}
+    ],
+    "Errors": []
+}
