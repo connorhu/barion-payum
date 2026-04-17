@@ -14,7 +14,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
-final class BarionClient
+class BarionClient
 {
     public function __construct(
         private readonly BarionApi $api,
