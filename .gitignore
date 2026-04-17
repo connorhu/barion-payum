@@ -1,0 +1,5 @@
+.claude
+docs
+composer.lock
+.phpunit.*
+vendor
