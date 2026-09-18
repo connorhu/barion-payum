@@ -25,7 +25,7 @@ final class CaptureActionTest extends TestCase
     {
         $this->client  = $this->createMock(BarionClient::class);
         $this->gateway = $this->createMock(GatewayInterface::class);
-        $this->api     = new BarionApi(posKey: 'test-key', sandbox: true);
+        $this->api     = new BarionApi(posKey: 'test-key', payee: 'shop@example.com', sandbox: true);
         $this->action  = new CaptureAction($this->client, $this->api);
         $this->action->setGateway($this->gateway);
     }

@@ -22,7 +22,7 @@ final class CancelActionTest extends TestCase
         $this->client = $this->createMock(BarionClient::class);
         $this->action = new CancelAction(
             $this->client,
-            new BarionApi(posKey: 'test-key', sandbox: true),
+            new BarionApi(posKey: 'test-key', payee: 'shop@example.com', sandbox: true),
         );
     }
 

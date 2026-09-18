@@ -55,6 +55,7 @@ final class CaptureAction implements ActionInterface, GatewayAwareInterface
             redirectUrl: (string) $details['redirect_url'],
             callbackUrl: (string) $details['callback_url'],
             orderNumber: (string) $details['order_number'],
+            payee: $this->api->payee,
         ));
 
         $details['barion_payment_id'] = $response->paymentId;

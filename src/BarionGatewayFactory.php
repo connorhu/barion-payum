@@ -13,6 +13,7 @@ use CodeConjure\BarionPayum\Action\StatusAction;
 use CodeConjure\BarionPayum\Api\BarionApi;
 use CodeConjure\BarionPayum\Api\BarionClient;
 use Payum\Core\Bridge\Spl\ArrayObject as PayumArrayObject;
+use LogicException;
 use Payum\Core\GatewayFactory;
 
 final class BarionGatewayFactory extends GatewayFactory
@@ -23,11 +24,24 @@ final class BarionGatewayFactory extends GatewayFactory
             'payum.factory_name'  => 'barion',
             'payum.factory_title' => 'Barion',
 
-            'barion.api' => fn(PayumArrayObject $c) => new BarionApi(
-                posKey: (string) $c['pos_key'],
-                sandbox: (bool) $c['sandbox'],
-                currency: (string) ($c['currency'] ?? 'HUF'),
-            ),
+            'barion.api' => function (PayumArrayObject $c): BarionApi {
+                $payee = (string) ($c['payee'] ?? '');
+
+                // Fail here rather than at the API: Barion answers a missing
+                // Payee with a generic error that is hard to trace back.
+                if ('' === $payee) {
+                    throw new LogicException(
+                        'The "payee" option is required — it is the shop\'s own Barion e-mail address.'
+                    );
+                }
+
+                return new BarionApi(
+                    posKey: (string) $c['pos_key'],
+                    payee: $payee,
+                    sandbox: (bool) $c['sandbox'],
+                    currency: (string) ($c['currency'] ?? 'HUF'),
+                );
+            },
 
             'barion.client' => fn(PayumArrayObject $c) => new BarionClient(
                 api: $c['barion.api'],
@@ -63,6 +77,7 @@ final class BarionGatewayFactory extends GatewayFactory
 
         $config->defaults([
             'pos_key'  => null,
+            'payee'    => null,
             'sandbox'  => true,
             'currency' => 'HUF',
         ]);

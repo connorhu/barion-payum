@@ -17,8 +17,12 @@ readonly class PreparePaymentRequest
         public string $redirectUrl,
         public string $callbackUrl,
         public string $orderNumber,
+        public string $payee,
         public array $items = [],
         public ?string $locale = 'hu-HU',
+        public bool $guestCheckOut = true,
+        /** @var string[] Barion funding sources, e.g. ['All'] or ['Balance']. */
+        public array $fundingSources = ['All'],
     ) {}
 
     /** @return array<string, mixed> */
@@ -27,11 +31,13 @@ readonly class PreparePaymentRequest
         return [
             'POSKey'           => $this->posKey,
             'PaymentType'      => $this->paymentType,
+            'GuestCheckOut'    => $this->guestCheckOut,
+            'FundingSources'   => $this->fundingSources,
             'PaymentRequestId' => $this->paymentRequestId,
             'Transactions'     => [
                 [
                     'POSTransactionId' => $this->orderNumber,
-                    'Payee'            => '',
+                    'Payee'            => $this->payee,
                     'Total'            => $this->total,
                     'Items'            => $this->items,
                 ],
