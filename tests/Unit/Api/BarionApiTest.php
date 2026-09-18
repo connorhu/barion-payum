@@ -11,25 +11,25 @@ final class BarionApiTest extends TestCase
 {
     public function testSandboxBaseUrl(): void
     {
-        $api = new BarionApi(posKey: 'test-key', sandbox: true);
+        $api = new BarionApi(posKey: 'test-key', payee: 'shop@example.com', sandbox: true);
         self::assertSame('https://api.test.barion.com', $api->getBaseUrl());
     }
 
     public function testProductionBaseUrl(): void
     {
-        $api = new BarionApi(posKey: 'prod-key', sandbox: false);
+        $api = new BarionApi(posKey: 'prod-key', payee: 'shop@example.com', sandbox: false);
         self::assertSame('https://api.barion.com', $api->getBaseUrl());
     }
 
     public function testDefaultCurrency(): void
     {
-        $api = new BarionApi(posKey: 'key', sandbox: true);
+        $api = new BarionApi(posKey: 'key', payee: 'shop@example.com', sandbox: true);
         self::assertSame('HUF', $api->currency);
     }
 
     public function testCustomCurrency(): void
     {
-        $api = new BarionApi(posKey: 'key', sandbox: true, currency: 'EUR');
+        $api = new BarionApi(posKey: 'key', payee: 'shop@example.com', sandbox: true, currency: 'EUR');
         self::assertSame('EUR', $api->currency);
     }
 }

@@ -8,6 +8,12 @@ readonly class BarionApi
 {
     public function __construct(
         public string $posKey,
+        /**
+         * The shop's own Barion e-mail address. Barion requires a Payee on
+         * every transaction of a Payment/Start call, so a gateway without it
+         * cannot start a payment at all.
+         */
+        public string $payee,
         public bool $sandbox,
         public string $currency = 'HUF',
     ) {}

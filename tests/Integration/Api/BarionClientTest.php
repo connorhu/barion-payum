@@ -17,7 +17,7 @@ final class BarionClientTest extends TestCase
 {
     private function makeClient(MockResponse ...$responses): BarionClient
     {
-        $api = new BarionApi(posKey: 'test-pos-key', sandbox: true);
+        $api = new BarionApi(posKey: 'test-pos-key', payee: 'shop@example.com', sandbox: true);
         $mock = new MockHttpClient($responses);
         $psr18 = new Psr18Client($mock);
 
@@ -44,6 +44,7 @@ final class BarionClientTest extends TestCase
             redirectUrl: 'https://shop.example.com/return',
             callbackUrl: 'https://shop.example.com/notify',
             orderNumber: 'order-42',
+            payee: 'shop@example.com',
         ));
 
         self::assertSame('pay-abc-123', $response->paymentId);
@@ -67,6 +68,7 @@ final class BarionClientTest extends TestCase
             redirectUrl: 'https://shop.example.com/return',
             callbackUrl: 'https://shop.example.com/notify',
             orderNumber: 'order-1',
+            payee: 'shop@example.com',
         ));
     }
 

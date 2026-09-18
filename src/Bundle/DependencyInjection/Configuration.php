@@ -16,6 +16,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('pos_key')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('payee')->isRequired()->cannotBeEmpty()->end()
                 ->booleanNode('sandbox')->defaultTrue()->end()
                 ->scalarNode('currency')->defaultValue('HUF')->end()
             ->end();
